@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :already_login?, only: [:new, :create]
+  before_action :login?, only: :show
   def new
     # からのモデル
     @user = User.new
@@ -10,6 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_path, notice: "登録完了しました"
     else
+      flash.now[:alert] = "全て入力してください"
       render :new
   end
 end

@@ -1,0 +1,56 @@
+<h1><%= @company_name.company_name %>の質問想定集</h1>
+<div class="d-flex justify-content-center">
+  <% if @interview.errors.any? %>
+    <% @interview.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+  <% end %>
+  <h3>
+    <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal">
+      <i class="fas fa-plus btn-primar">追加</i>
+    </button>
+  </h3>
+</div>
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">想定質問及び回答入力</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="list-group text-center">
+          <%= form_with model: @interview, url: user_company_name_interviews_path, local:true do |f| %>
+            <div class="card-tite">
+              <label for="book-opinion">想定質問事項</label>
+              <%= f.text_field :content, class:"form-control" %>
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">回答</label>
+              <%= f.text_area :answer, class:"form-control" %>
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">メモ</label>
+              <%= f.text_area :memo, class:"form-control" %>
+            </div>
+            <div class="card-title">
+            <%= f.submit '投稿', class: "btn btn-success" %>
+           </div>
+        </div>
+        <% end %>
+      </div>
+   </div>
+ </div>
+ <% @interviews.each do |interview| %>
+ <div class="card">
+   <div class="card-header">
+     <%= interview.content %>
+   </div>
+   <div class="card-body">
+     <h5 class="card-title"><%= interview.answer %></h5>
+     <p class="card-text"><%= interview.memo %></p>
+     <%= link_to "編集", edit_user_company_name_interview_path(@company_name, interview), class:"btn btn-success" %>
+   </div>
+ </div>
+<% end %>

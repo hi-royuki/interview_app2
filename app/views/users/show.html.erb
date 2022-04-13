@@ -1,2 +1,25 @@
-<h1><%= current_user.name %>さんようこそ</h1>
-<p><%= current_user.email %></p>
+<h1><%= current_user.name %>さんの面接予定企業一覧</h1>
+ <%= link_to "面接企業登録", new_user_company_name_path %>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-secondary">
+            <th>企業名</th>
+            <th>面接日</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @company_names.each do |company_name| %>
+        <tr>
+            <td><%= company_name.company_name %></td>
+            <td><%= company_name.interview_date %></td>
+            <td>
+                <%= link_to "想定質問及び回答入力", user_company_name_interviews_path(company_name.id) %>
+            </td>
+            <!--<td>%= link_to "削除", user_path(@company_name), method: :delete %></td>-->
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+

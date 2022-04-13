@@ -1,2 +1,19 @@
-<h1>CompanyNames#new</h1>
-<p>Find me in app/views/company_names/new.html.erb</p>
+<h1>面接予定の企業登録</h1>
+
+<%= form_with model: @company_name, url: user_company_names_path, local: true do |f| %>
+
+  <div class="field">
+    <%= f.label :企業名 %><br>
+    <%= f.text_field :company_name %>
+  </div>
+  <div class="field">
+    <%= f.label :面接日 %><br>
+    <%= f.date_field :interview_date %>
+  </div>
+
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+
+
+<% end %>

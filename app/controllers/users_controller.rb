@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 end
 
   def show
+    @user = current_user
+    @company_names = @user.company_name.all
   end
 
   private

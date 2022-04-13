@@ -1,0 +1,11 @@
+<h1>「<%= @company_name.company_name %>」の質問回答編集ページ</h1>
+<div class="card">
+   <div class="card-header">
+     <%= @interview.content %>
+   </div>
+   <div class="card-body">
+     <h5 class="card-title"><%= @interview.answer %></h5>
+     <p class="card-text"><%= @interview.memo %></p>
+     <!--%= link_to "編集", edit_user_company_name_interview_path(@company_name, interview), class:"btn btn-success" %>-->
+   </div>
+ </div>

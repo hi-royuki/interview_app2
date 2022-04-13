@@ -28,9 +28,16 @@ class InterviewsController < ApplicationController
   end
 
   def update
+    @company_name = CompanyName.find(params[:company_name_id])
+    @interview = Interview.find(params[:id])
+    @interview.update(interview_params)
+    redirect_to user_company_name_interviews_path(@interview), notice: "変更しました。"
   end
 
   def destroy
+    @interview = Interview.find(params[:id])
+    @interview.destroy
+    redirect_to user_company_name_interviews_path(@interview), notice: "削除できました。"
   end
 
   private

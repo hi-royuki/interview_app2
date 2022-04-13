@@ -42,14 +42,19 @@
       </div>
    </div>
  </div>
+ 
  <% @interviews.each do |interview| %>
- <div class="card">
-   <div class="card-header">
-     <%= interview.content %>
+ <div class="modal-content mt-3">
+   <div class="modal-header">
+     <h5 class="modal-title"><%= interview.content %></h5>
    </div>
-   <div class="card-body">
-     <h5 class="card-title"><%= interview.answer %></h5>
-     <p class="card-text"><%= interview.memo %></p>
+   <div class="modal-body">
+     <p><%= interview.answer %></p>
+   </div>
+   <div class="modal-body">
+     <p><%= interview.memo %></p>
+   </div>
+   <div class="modal-footer">
      <%= link_to "編集", edit_user_company_name_interview_path(@company_name, interview), class:"btn btn-success" %>
    </div>
  </div>

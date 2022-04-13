@@ -1,11 +1,18 @@
-<h1>「<%= @company_name.company_name %>」の質問回答編集ページ</h1>
-<div class="card">
-   <div class="card-header">
-     <%= @interview.content %>
+<h1>「<%= @company_name.company_name %>」の質問・回答編集ページ</h1>
+<%= form_with model:@interview, url: user_company_name_interview_path(@company_name,@interview), local:true do |f| %>
+  <div class="modal-content mt-3">
+   <div class="modal-header">
+     <h5 class="modal-title"><%= f.text_field :content, autofocus: true, class:"form-control", id:"inputName", placeholder:"質問"%></h5>
    </div>
-   <div class="card-body">
-     <h5 class="card-title"><%= @interview.answer %></h5>
-     <p class="card-text"><%= @interview.memo %></p>
-     <!--%= link_to "編集", edit_user_company_name_interview_path(@company_name, interview), class:"btn btn-success" %>-->
+   <div class="modal-body">
+     <p><%= f.text_area :answer, autofocus: true, class:"form-control", id:"inputName", placeholder:"回答"%></p>
    </div>
- </div>
+   <div class="modal-body">
+     <p><%= f.text_area :memo, autofocus: true, class:"form-control", id:"inputName", placeholder:"備考（メモ）"%></p>
+   </div>
+   <div class="modal-footer">
+     <%= f.submit "変更を保存", class:"btn btn-primary btn-lg active" %>
+     <%= link_to "削除", user_company_name_interview_path(@company_name,@interview), method: :delete, data: { confirm: '削除しますか？' }, class:"btn btn-danger btn-lg active" %>
+   </div>
+  </div>
+ <% end %>

@@ -29,12 +29,8 @@ class CompanyNamesController < ApplicationController
 
   def destroy
     @company_name = CompanyName.find(params[:id])
-    if @company_name.destroy
+    @company_name.destroy
       redirect_to user_path, notice: "削除されました。"
-    else
-      flash.now[:alert] = "削除できませんでした。"
-      render :show
-    end
   end
 
   private

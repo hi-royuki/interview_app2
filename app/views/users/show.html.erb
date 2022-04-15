@@ -6,6 +6,7 @@
         <tr class="table-primary text-white">
             <th>企業名</th>
             <th>面接日</th>
+            <th>質問等の準備</th>
             <th></th>
         </tr>
     </thead>
@@ -17,7 +18,7 @@
             <td>
                 <%= link_to "想定質問及び回答入力", user_company_name_path(company_name.id) %>
             </td>
-            <!--<td>%= link_to "削除", user_path(@company_name), method: :delete %></td>-->
+            <td><%= link_to "削除", user_company_name_path(company_name.id), method: :delete, data: { confirm: '削除しますか？' } %></td>
         </tr>
         <% end %>
     </tbody>

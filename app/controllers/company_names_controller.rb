@@ -16,6 +16,12 @@ class CompanyNamesController < ApplicationController
     end
   end
 
+  def show
+    @company_name = CompanyName.find(params[:id])
+    @interview = Interview.new
+    # @interviews = Interview.all.order(create_at: :desc)
+  end
+
   def index
     @user = current_user
     @company_names = @user.company_names.all.order(created_at: :desc)

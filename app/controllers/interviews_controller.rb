@@ -3,24 +3,28 @@ class InterviewsController < ApplicationController
   end
 
   def index
-    @company_name = CompanyName.find(params[:company_name_id])
-    @interview = Interview.new
-    @interviews = Interview.all.order(create_at: :desc)
+    # @company_name = CompanyName.find(params[:company_name_id])
+    # @interview = Interview.new
+    # @interviews = Interview.all.order(create_at: :desc)
   end
 
   def create
     @interview = Interview.new(interview_params)
     @company_name = CompanyName.find(params[:company_name_id])
+    @interview.user_id = current_user.id
+    @interview.company_name_id = @company_name.id
     if @interview.save
-      redirect_to user_company_name_interviews_path, notice: "投稿しました。"
+      redirect_to user_company_name_path(@company_name), notice: "投稿しました。"
     else
-      @interviews = Interview.all.order(created_at: :desc)
-      render action: :index
+      flash.now[:alert] = "全て入力してください"
+      redirect_to user_company_name_path(@company_name)
     end
+
   end
 
-  def show
-  end
+  # def show
+
+  # end
 
   def edit
     @company_name = CompanyName.find(params[:company_name_id])
@@ -30,14 +34,17 @@ class InterviewsController < ApplicationController
   def update
     @company_name = CompanyName.find(params[:company_name_id])
     @interview = Interview.find(params[:id])
-    @interview.update(interview_params)
-    redirect_to user_company_name_interviews_path(@interview), notice: "変更しました。"
+  if @interview.update(interview_params)
+    redirect_to user_company_name_path(params[:company_name_id]), notice: "変更しました。"
+  else
+    flash.now[:alert] = "全て入力してください"
+    render action: :edit
+  end
   end
 
   def destroy
-    @interview = Interview.find(params[:id])
-    @interview.destroy
-    redirect_to user_company_name_interviews_path(@interview), notice: "削除できました。"
+    Interview.find_by(id: params[:id]).destroy
+    redirect_to user_company_name_path(params[:company_name_id]), notice: "削除できました。"
   end
 
   private

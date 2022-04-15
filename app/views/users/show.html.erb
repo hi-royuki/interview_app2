@@ -15,7 +15,7 @@
             <td><%= company_name.company_name %></td>
             <td><%= company_name.interview_date %></td>
             <td>
-                <%= link_to "想定質問及び回答入力", user_company_name_interviews_path(company_name.id) %>
+                <%= link_to "想定質問及び回答入力", user_company_name_path(company_name.id) %>
             </td>
             <!--<td>%= link_to "削除", user_path(@company_name), method: :delete %></td>-->
         </tr>

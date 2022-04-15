@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # 新規登録
   resource :user, only:[:new, :create, :show] do
     resources :company_names do
-      resources :interviews
+      resources :interviews, only:[:create, :destroy, :edit, :update]
     end
   end
 

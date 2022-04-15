@@ -1,4 +1,53 @@
 <h1><%= @post.company_name %></h1>
-<p>質問リスト</p>
-<p><%= @post.question %></p>
-<%= @post.introduction %>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th scope="col">質問リスト</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <th><%= @post.question_a %></th>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <th><%= @post.question_b %></th>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <th><%= @post.question_c %></th>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <th><%= @post.question_d %></th>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <th><%= @post.question_e %></th>
+      </tr><tr>
+        <th scope="row">6</th>
+        <th><%= @post.question_f %></th>
+      </tr>
+      <tr>
+        <th scope="row">7</th>
+        <th><%= @post.question_g %></th>
+      </tr>
+      <tr>
+        <th scope="row">8</th>
+        <th><%= @post.question_h %></th>
+      </tr>
+      <tr>
+        <th scope="row">9</th>
+        <th><%= @post.question_i %></th>
+      </tr>
+      <tr>
+        <th scope="row">10</th>
+        <th><%= @post.question_j %></th>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

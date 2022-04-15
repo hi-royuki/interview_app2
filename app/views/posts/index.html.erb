@@ -1,0 +1,85 @@
+<h1>企業一覧</h1>
+ <h3>
+    <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal">
+      <i class="fas fa-plus btn-primar">投稿</i>
+    </button>
+  </h3>
+</div>
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">面接の内容を共有しよう！</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="list-group text-center">
+          <%= form_with model: @post, url: posts_path, local:true do |f| %>
+            <div class="card-tite">
+              <label for="book-opinion">企業名</label>
+              <%= f.text_field :company_name, class:"form-control" %>
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">面接の回数</label>
+              <%= f.select :number, [["一次面接", "一次面接"], ["二次面接", "二次面接"], ["三次面接", "三次面接"], ["最終面接", "最終面接"], ["その他", "その他"]], include_blank: "選択して下さい" %>
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">就活の種類</label>
+              <%= f.select :type, [["新卒者", "新卒者"], ["転職者", "転職者"], ["その他", "その他"]], include_blank: "選択して下さい" %>
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">質問内容</label><br>
+              1<%= f.text_field :question, class:"form-control" %>
+
+
+            </div>
+            <div class="card-tite">
+              <label for="book-opinion">面接の雰囲気(自由記載)</label>
+              <%= f.text_area :introduction, class:"form-control" %>
+            </div>
+            <div class="card-title">
+            <%= f.submit '投稿', class: "btn btn-success" %>
+           </div>
+        </div>
+        <% end %>
+      </div>
+   </div>
+ </div>
+
+
+<div class="container">
+ <table class="table table-bordered">
+    <thead>
+        <tr class="table-primary text-white">
+            <th>企業名</th>
+            <th>面接回数</th>
+            <th>面接の種類</th>
+            <th>メモ</th>
+            <th>投稿日時</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @posts.each do |post| %>
+        <tr>
+            <td>
+            <%= link_to post_path(post) do %>
+              <%= post.company_name %>
+            <% end %>
+            </td>
+            <td><%= post.number %></td>
+            <td><%= post.type %></td>
+            <td><%= post.introduction %></td>
+            <td><i class="far fa-clock"><%= post.created_at.strftime('%Y/%m/%d') %></i></td>
+            <td>
+            <% if @post.user == current_user %>
+              <%= link_to "削除", posts_destroy_path(post), method: :delete, data: { confirm: '削除しますか？' } %>
+            <% end %>
+            </td>
+
+        </tr>
+        <% end %>
+    </tbody>
+ </table>
+</div>

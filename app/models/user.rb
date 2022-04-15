@@ -5,4 +5,5 @@ class User < ApplicationRecord
   validates :email, presence: true
 
    has_many :company_name, dependent: :destroy
+   has_many :post, dependent: :destroy
 end

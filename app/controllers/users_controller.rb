@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  # ログインしているユーザーがログイン画面に行ったり、新規登録画面へ行かないようにする制限
   before_action :already_login?, only: [:new, :create]
+  # ログインしていないユーザーがユーザー画面に入れないようにする制限
   before_action :login?, only: :show
   def new
     # からのモデル

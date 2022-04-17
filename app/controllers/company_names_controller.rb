@@ -1,5 +1,5 @@
 class CompanyNamesController < ApplicationController
-
+before_action :login?
   def new
     @company_name = CompanyName.new
   end

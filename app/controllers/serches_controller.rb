@@ -1,2 +1,3 @@
 class SerchesController < ApplicationController
+
 end

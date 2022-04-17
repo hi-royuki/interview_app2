@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   resources :posts, only:[:index, :new, :create, :show, :edit, :update]
   delete 'posts/:id' => 'posts#destroy', as: 'posts_destroy'
+  get 'search' => 'posts#search'
   # 新規登録
   resource :user, only:[:new, :create, :show] do
     resources :company_names do

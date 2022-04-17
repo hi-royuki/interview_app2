@@ -8,7 +8,6 @@ before_action :already_login?, except: :destroy
     user = User.find_by_email(params[:email])
     # 上の記述でメールで探してきたユーザーのパスワードがあっていれば
     if user && user.authenticate(params[:password])
-
       session[:user_id] = user.id
       redirect_to user_path, notice: "ログインしました"
     else

@@ -1,4 +1,5 @@
 class InterviewsController < ApplicationController
+
   def new
   end
 
@@ -16,7 +17,8 @@ class InterviewsController < ApplicationController
     if @interview.save
       redirect_to user_company_name_path(@company_name), notice: "投稿しました。"
     else
-      flash.now[:alert] = "全て入力してください"
+      #　redirect_toの場合はflash.now[:alert]は使用不可
+      flash[:alert] = "全て入力してください"
       redirect_to user_company_name_path(@company_name)
     end
 

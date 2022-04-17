@@ -1,5 +1,11 @@
-<h1>企業一覧</h1>
+<div class="search-form">
+  <%= form_with mode: @post, url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
  <h3>
+
     <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal">
       <i class="fas fa-plus btn-primar">投稿</i>
     </button>
@@ -10,6 +16,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">面接の内容を共有しよう！</h5>
+
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -17,20 +24,20 @@
         <div class="list-group text-center">
           <%= form_with model: @post, url: posts_path, local:true do |f| %>
             <div class="card-tite">
-              <label for="book-opinion"><strong>企業名</strong></label>
+              <label for="book-opinion"><strong>企業名(必須)</strong></label>
               <%= f.text_field :company_name, class:"form-control" %>
             </div>
             <div class="card-tite">
-              <label for="book-opinion"><strong>面接の回数</strong></label><br>
+              <label for="book-opinion"><strong>面接の回数(必須)</strong></label><br>
               <%= f.select :number, [["一次面接", "一次面接"], ["二次面接", "二次面接"], ["三次面接", "三次面接"], ["最終面接", "最終面接"], ["その他", "その他"]], include_blank: "選択して下さい" %>
             </div>
             <div class="card-tite">
-              <label for="book-opinion"><strong>就活の種類</strong></label><br>
+              <label for="book-opinion"><strong>就活の種類(必須)</strong></label><br>
               <%= f.select :type, [["新卒者", "新卒者"], ["転職者", "転職者"], ["その他", "その他"]], include_blank: "選択して下さい" %>
             </div>
             <div class="card-tite">
               <label for="book-opinion"><strong>質問内容</strong></label><br>
-              1<%= f.text_field :question_a, class:"form-control" %>
+              1(必須)<%= f.text_field :question_a, class:"form-control" %>
               2<%= f.text_field :question_b, class:"form-control" %>
               3<%= f.text_field :question_c, class:"form-control" %>
               4<%= f.text_field :question_d, class:"form-control" %>
@@ -40,9 +47,6 @@
               8<%= f.text_field :question_h, class:"form-control" %>
               9<%= f.text_field :question_i, class:"form-control" %>
               10<%= f.text_field :question_j, class:"form-control" %>
-
-
-
             </div>
             <div class="card-tite">
               <label for="book-opinion"><strong>面接の雰囲気(自由記載)</strong></label>
@@ -62,31 +66,25 @@
  <table class="table table-bordered">
     <thead>
         <tr class="table-primary text-white">
-            <th>企業名</th>
-            <th>面接回数</th>
-            <th>面接の種類</th>
-            <th>メモ</th>
-            <th>投稿日時</th>
-            <th></th>
+          <th>企業名</th>
+          <th>面接回数</th>
+          <th>面接の種類</th>
+          <th>メモ</th>
+          <th>投稿日時</th>
         </tr>
     </thead>
     <tbody>
         <% @posts.each do |post| %>
         <tr>
-            <td>
-            <%= link_to post_path(post) do %>
-              <%= post.company_name %>
-            <% end %>
-            </td>
-            <td><%= post.number %></td>
-            <td><%= post.type %></td>
-            <td><%= post.introduction %></td>
-            <td><i class="far fa-clock"><%= post.created_at.strftime('%Y/%m/%d') %></i></td>
-            <td>
-            <% if @post.user == current_user %>
-              <%= link_to "削除", posts_destroy_path(post), method: :delete, data: { confirm: '削除しますか？' } %>
-            <% end %>
-            </td>
+          <td>
+          <%= link_to post_path(post) do %>
+            <%= post.company_name %>
+          <% end %>
+          </td>
+          <td><%= post.number %></td>
+          <td><%= post.type %></td>
+          <td><%= post.introduction %></td>
+          <td><i class="far fa-clock"><%= post.created_at.strftime('%Y/%m/%d') %></i></td>
 
         </tr>
         <% end %>
